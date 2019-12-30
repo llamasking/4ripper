@@ -23,7 +23,7 @@ module.exports = (message, args) => {
     // Split apart args to get the board and thread.
     var parseURL = url.parse(args[0], true);
 
-    if (!parseURL.host === 'boards.4chan.org' | 'boards.4channel.org') {
+    if (!parseURL.host === ('boards.4chan.org' || 'boards.4channel.org')) {
         // lmao fuck off you fag
         message.reply('lmao no easy security issues for you, fucking faggot');
 
@@ -38,7 +38,7 @@ module.exports = (message, args) => {
 
     // Define request-promise options
     const options = {
-        uri: parseURL,
+        uri: parseURL.href.replace('https://boards.4chan.org/', 'https://boards.4channel.org/'),
         transform: function (body) {
             return cheerio.load(body);
         }
@@ -68,7 +68,7 @@ module.exports = (message, args) => {
             async function sendMsgsAsync(i) {
                 await message.channel.send(`${i + 1}/${files.length}`, { files: [files[i]] })
                     .then(() => {
-                        console.log('Success!');
+                        //console.log('Success!');
                     })
                     .catch((err) => {
                         message.channel.send(`It appears file ${i + 1}/${files.length} failed to send. Oh well, go fuck that one!`);
