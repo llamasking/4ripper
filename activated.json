@@ -1,5 +1,7 @@
 {
     "example": false,
-    "credits": true,
-    "hash": true
+    "credits": false,
+    "hash": true,
+    "help": true,
+    "rip": true
 }

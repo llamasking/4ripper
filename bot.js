@@ -70,22 +70,18 @@ client.on('message', async (message) => {
       // Checks if the message author is the owner.
       // If not, ignore it.
       if (message.author.id === config.ownerID) execcmd(message);
-
       break;
-
 
     case 'ping':
       // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
       // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
-      const m = await message.channel.send('Testing ping!');
+      var m = await message.channel.send('Testing ping!');
       m.edit(`Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
       break;
-
 
     // Load from module if command plays well in a module
     default:
       loadmod(cmd, args, message);
-
   }
 
   // Logging <READ THE TERMS ON THE GITHUB REPO FOR MORE INFO>
