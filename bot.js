@@ -4,8 +4,11 @@ const client = new Discord.Client();
 const fs = require('fs');
 
 // Load configs.
-const config = require('./config.json');
+// const config = require('./config.json');
 const activated = require('./activated.json');
+
+// Heroku
+const config = process.env;
 
 // Load framework
 const hashthis = require('./framework/hashthis.js');
