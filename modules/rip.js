@@ -67,16 +67,13 @@ module.exports = (message, args) => {
             // and this uploads a thing i think
             async function sendMsgsAsync(i) {
                 await message.channel.send(`${i + 1}/${files.length}`, { files: [files[i]] })
-                    .then(() => {
-                        //console.log('Success!');
-                    })
                     .catch((err) => {
                         message.channel.send(`It appears file ${i + 1}/${files.length} failed to send. Oh well, go fuck that one!`);
                         console.error(err);
                     });
 
                 // callback
-                sendMsgsAsync(i + 1);
+                if (i < files.length - 1) sendMsgsAsync(i + 1);
             }
 
             sendMsgsAsync(0);
