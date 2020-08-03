@@ -6,8 +6,16 @@ const client = new Discord.Client();
 const fs = require('fs');
 const hashthis = require('./framework/hashthis.js');
 
-// Load configs.
-const config = require('./config.json');
+/*
+ * Config.json is not used anymore.
+ * Use Config Vars in Heroku instead.
+ * You *can* use it instead if you really want to for some reason.
+ *
+ * const config = require('./config.json');
+ */
+
+// Use Heroku Config Vars for
+const config = process.env;
 const activated = require('./activated.json');
 
 // List detected modules at bot startup
