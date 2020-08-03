@@ -1,7 +1,7 @@
 /*
  * Command: Rip
  * Description: Rips all uploaded images and videos from 4chan and reuploads them.
-*/
+ */
 
 // Tis needs url module.
 const url = require('url');
@@ -41,7 +41,7 @@ module.exports = (message, args) => {
         uri: parseURL.href.replace('https://boards.4chan.org/', 'https://boards.4channel.org/'),
         transform: function (body) {
             return cheerio.load(body);
-        }
+        },
     };
 
     // Make the request
@@ -51,10 +51,10 @@ module.exports = (message, args) => {
     rp(options)
         .then(($) => {
             // i think this says something lmao
-            var embed = new Discord.RichEmbed()
+            var embed = new Discord.MessageEmbed()
                 .addField('Thread URL:', parseURL.href)
                 .setTitle('File count: ' + $('.fileThumb').length)
-                .setColor(0x7289DA)
+                .setColor(0x7289da)
                 .setFooter('If files are not uploaded, that means my internet gave up on one, some, or many files.');
             message.reply(embed);
 
@@ -66,11 +66,10 @@ module.exports = (message, args) => {
 
             // and this uploads a thing i think
             async function sendMsgsAsync(i) {
-                await message.channel.send(`${i + 1}/${files.length}`, { files: [files[i]] })
-                    .catch((err) => {
-                        message.channel.send(`It appears file ${i + 1}/${files.length} failed to send. Oh well, go fuck that one!`);
-                        console.error(err);
-                    });
+                await message.channel.send(`${i + 1}/${files.length}`, { files: [files[i]] }).catch((err) => {
+                    message.channel.send(`It appears file ${i + 1}/${files.length} failed to send. Oh well, go fuck that one!`);
+                    console.error(err);
+                });
 
                 // callback
                 if (i < files.length - 1) sendMsgsAsync(i + 1);
